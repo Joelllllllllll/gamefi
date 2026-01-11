@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle del Juego - GameVault</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --accent: #ff4747; /* Rojo tipo Instant Gaming */
+            --bg-dark: #0f1011;
+            --card-bg: #1a1c1e;
+            --text-gray: #a0a0a0;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--white);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .product-container {
+            max-width: 1200px;
+            margin: 120px auto 50px;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .product-hero {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .product-main-img img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .product-main-info h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .platform-badge {
+            background: rgba(255,255,255,0.1);
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: var(--accent);
+        }
+
+        .score-circle {
+            width: 60px;
+            height: 60px;
+            border: 3px solid var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin: 1rem 0;
+        }
+
+        .buy-box {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            height: fit-content;
+        }
+
+        .price-tag {
+            font-size: 2.2rem;
+            font-weight: 800;
+            display: block;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Sections Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Video Section */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            background: #000;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Description */
+        .description-box {
+            color: var(--text-gray);
+            line-height: 1.8;
+            font-size: 1.05rem;
+            position: relative;
+        }
+
+        .description-box.collapsed {
+            max-height: 150px;
+            overflow: hidden;
+        }
+
+        .read-more-btn {
+            color: var(--accent);
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 10px;
+            display: block;
+        }
+
+        /* Features */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .feature-tag {
+            background: var(--card-bg);
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* Metadata */
+        .metadata-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .metadata-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-size: 0.95rem;
+        }
+
+        .metadata-label {
+            color: var(--text-gray);
+        }
+
+        /* News Section */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .news-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .news-img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+        }
+
+        .news-content {
+            padding: 1.2rem;
+        }
+
+        .news-date {
+            font-size: 0.8rem;
+            color: var(--accent);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .news-title {
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        @media (max-width: 1000px) {
+            .product-hero { grid-template-columns: 1fr; }
+            .content-grid { grid-template-columns: 1fr; }
+            .buy-box { order: -1; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">GAMEF<span>Y</span></div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+            </ul>
+        </nav>
+        <div class="cart-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+            <span class="cart-count">0</span>
+        </div>
+    </header>
+
+    <main id="product-content">
+        <!-- Content will be injected here -->
+    </main>
+
+    <div class="cart-drawer">
+        <div class="cart-header">
+            <h2>Tu Carrito</h2>
+            <div class="close-cart">&times;</div>
+        </div>
+        <div class="cart-items"></div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cart-total-amount">Bs0.00</span>
+            </div>
+            <button class="checkout-btn" id="open-checkout-modal">Finalizar Pedido vía WhatsApp</button>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div id="checkout-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Datos de Contacto</h2>
+            <form id="checkout-form">
+                <div class="form-group">
+                    <label for="customer-name">Nombre Completo</label>
+                    <input type="text" id="customer-name" required placeholder="Ej. Juan Pérez">
+                </div>
+                <div class="form-group">
+                    <label for="customer-phone">Teléfono de Contacto</label>
+                    <input type="tel" id="customer-phone" required placeholder="Ej. 77920302">
+                </div>
+                <button type="submit" class="confirm-order-btn">Confirmar Pedido</button>
+            </form>
+        </div>
+    </div>
+
+    <script type="module">
+        import games from './data.js';
+        
+        // Cart logic for product page
+        let cart = JSON.parse(localStorage.getItem('gameStoreCart')) || [];
+
+        function saveCart() {
+            localStorage.setItem('gameStoreCart', JSON.stringify(cart));
+        }
+
+        function updateCartUI() {
+            const cartCount = document.querySelector('.cart-count');
+            const cartItems = document.querySelector('.cart-items');
+            const cartTotal = document.getElementById('cart-total-amount');
+
+            if (cartCount) {
+                cartCount.innerText = cart.reduce((sum, item) => sum + item.quantity, 0);
+            }
+
+            if (cartItems) {
+                cartItems.innerHTML = '';
+                let total = 0;
+                cart.forEach(item => {
+                    total += item.price * item.quantity;
+                    const el = document.createElement('div');
+                    el.className = 'cart-item';
+                    el.innerHTML = `
+                        <img src="${item.image}">
+                        <div class="cart-item-info">
+                            <h4>${item.title}</h4>
+                            <p>${item.quantity} x Bs${item.price.toFixed(2)}</p>
+                        </div>
+                    `;
+                    cartItems.appendChild(el);
+                });
+                if (cartTotal) cartTotal.innerText = 'Bs' + total.toFixed(2);
+            }
+        }
+
+        window.addToCart = function(id) {
+            const game = games.find(g => g.id === parseInt(id));
+            const cartItem = cart.find(item => item.id === parseInt(id));
+            if (cartItem) cartItem.quantity += 1;
+            else cart.push({...game, quantity: 1});
+            saveCart();
+            updateCartUI();
+            document.querySelector('.cart-drawer').classList.add('active');
+        }
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const gameId = urlParams.get('id');
+
+        if (gameId) {
+            const game = games.find(g => g.id == gameId);
+            if (game) {
+                document.title = `${game.title} - GameVault`;
+                const content = document.getElementById('product-content');
+                
+                // Build news HTML if exists
+                let newsHtml = '';
+                if (game.news && game.news.length > 0) {
+                    newsHtml = `
+                        <section class="news-section">
+                            <h2 class="section-title">Últimas Noticias</h2>
+                            <div class="news-grid">
+                                ${game.news.map(n => `
+                                    <div class="news-card">
+                                        <img src="${n.image}" class="news-img">
+                                        <div class="news-content">
+                                            <span class="news-date">${n.date}</span>
+                                            <div class="news-title">${n.title}</div>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </section>
+                    `;
+                }
+
+                content.innerHTML = `
+                    <div class="product-container">
+                        <section class="product-hero">
+                            <div class="product-main-img">
+                                <img src="${game.image}" alt="${game.title}">
+                            </div>
+                            <div class="product-main-info">
+                                <span class="platform-badge">${game.platform}</span>
+                                <h1>${game.title}</h1>
+                                <div class="score-circle">${game.score || 'N/A'}</div>
+                                <p style="color: var(--text-gray)">Puntuación de los usuarios</p>
+                            </div>
+                            <div class="buy-box">
+                                <span class="price-tag">Bs${game.price.toFixed(2)}</span>
+                                <button class="buy-now" onclick="addToCart(${game.id})" style="width: 100%; padding: 1.2rem; background: var(--accent); color: white; border: none; border-radius: 8px; font-weight: 700; cursor: pointer;">
+                                    Añadir al Carrito
+                                </button>
+                            </div>
+                        </section>
+
+                        <div class="content-grid">
+                            <div class="left-col">
+                                <section class="visuals">
+                                    <h2 class="section-title">Visuales</h2>
+                                    <div class="video-container">
+                                        <iframe src="${game.trailer}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    </div>
+                                </section>
+
+                                <section class="about">
+                                    <h2 class="section-title">Sobre el juego</h2>
+                                    <div class="description-box collapsed" id="desc-box">
+                                        ${game.longDescription || game.description}
+                                    </div>
+                                    <span class="read-more-btn" onclick="toggleDescription()">Leer más +</span>
+                                </section>
+
+                                <section class="features">
+                                    <h2 class="section-title">Características</h2>
+                                    <div class="features-grid">
+                                        ${(game.features || []).map(f => `<div class="feature-tag">${f}</div>`).join('')}
+                                    </div>
+                                </section>
+
+                                ${game.requirements ? `
+                                <section class="configurations">
+                                    <h2 class="section-title">Configuraciones</h2>
+                                    <div class="specs-container">
+                                        <div class="specs-grid">
+                                            <div class="specs-column">
+                                                <h3>Mínimo</h3>
+                                                <ul class="specs-list">
+                                                    <li><span class="specs-label">SO</span> ${game.requirements.minimum.os}</li>
+                                                    <li><span class="specs-label">Procesador</span> ${game.requirements.minimum.processor}</li>
+                                                    <li><span class="specs-label">Memoria</span> ${game.requirements.minimum.memory}</li>
+                                                    <li><span class="specs-label">Gráficos</span> ${game.requirements.minimum.graphics}</li>
+                                                    <li><span class="specs-label">Almacenamiento</span> ${game.requirements.minimum.storage}</li>
+                                                </ul>
+                                            </div>
+                                            <div class="specs-column">
+                                                <h3>Recomendado</h3>
+                                                <ul class="specs-list">
+                                                    <li><span class="specs-label">SO</span> ${game.requirements.recommended.os}</li>
+                                                    <li><span class="specs-label">Procesador</span> ${game.requirements.recommended.processor}</li>
+                                                    <li><span class="specs-label">Memoria</span> ${game.requirements.recommended.memory}</li>
+                                                    <li><span class="specs-label">Gráficos</span> ${game.requirements.recommended.graphics}</li>
+                                                    <li><span class="specs-label">Almacenamiento</span> ${game.requirements.recommended.storage}</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                                ` : ''}
+                            </div>
+
+                            <div class="right-col">
+                                <h2 class="section-title">Información</h2>
+                                <ul class="metadata-list">
+                                    <li><span class="metadata-label">Desarrollador</span> <span>${game.metadata?.developer || 'N/A'}</span></li>
+                                    <li><span class="metadata-label">Editor</span> <span>${game.metadata?.publisher || 'N/A'}</span></li>
+                                    <li><span class="metadata-label">Fecha lanzamiento</span> <span>${game.metadata?.releaseDate || 'N/A'}</span></li>
+                                    <li><span class="metadata-label">Género</span> <span>${game.metadata?.genre || 'N/A'}</span></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        ${newsHtml}
+                    </div>
+                `;
+            }
+        }
+
+        window.toggleDescription = function() {
+            const box = document.getElementById('desc-box');
+            const btn = document.querySelector('.read-more-btn');
+            if (box.classList.contains('collapsed')) {
+                box.classList.remove('collapsed');
+                btn.innerText = 'Leer menos -';
+            } else {
+                box.classList.add('collapsed');
+                btn.innerText = 'Leer más +';
+            }
+        }
+
+        // Initialize UI
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCartUI();
+            document.querySelector('.cart-icon').onclick = () => document.querySelector('.cart-drawer').classList.add('active');
+            document.querySelector('.close-cart').onclick = () => document.querySelector('.cart-drawer').classList.remove('active');
+            
+            // Modal Logic
+            const modal = document.getElementById('checkout-modal');
+            const openModalBtn = document.getElementById('open-checkout-modal');
+            const closeModalBtn = document.querySelector('.close-modal');
+            const checkoutForm = document.getElementById('checkout-form');
+
+            openModalBtn.onclick = () => {
+                if (cart.length === 0) {
+                    alert("El carrito está vacío.");
+                    return;
+                }
+                modal.classList.add('active');
+                document.querySelector('.cart-drawer').classList.remove('active');
+            };
+
+            closeModalBtn.onclick = () => modal.classList.remove('active');
+            window.onclick = (e) => { if (e.target == modal) modal.classList.remove('active'); };
+
+            checkoutForm.onsubmit = (e) => {
+                e.preventDefault();
+                const name = document.getElementById('customer-name').value;
+                const phone = document.getElementById('customer-phone').value;
+                performCheckout(name, phone);
+            };
+        });
+
+        function performCheckout(name, phone) {
+            let subtotal = 0;
+            let productsList = "";
+            cart.forEach(item => {
+                subtotal += item.price * item.quantity;
+                productsList += `• ${item.title} - ${item.quantity} un. - Bs${item.price.toFixed(2)}\n`;
+            });
+            
+            const message = `¡Hola! Acabo de realizar el siguiente Pedido:
+
+ Información de contacto:
+Nombre: ${name}
+Teléfono: ${phone}
+
+ Pedido:
+${productsList}
+ Precio original: Bs${subtotal.toFixed(2)}
+Total: Bs${subtotal.toFixed(2)}`;
+
+            const whatsappUrl = `https://wa.me/59178019174?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GAMEFY - Tu Tienda de Videojuegos</title>
+    <meta name="description" content="La mejor tienda de videojuegos con los mejores precios. Compra Cyberpunk 2077, Elden Ring, Recargas y más.">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">GAMEF<span>Y</span></div>
+        <nav>
+            <ul id="platform-filters">
+                <li><a href="#" data-platform="All">Inicio</a></li>
+                <li><a href="#" data-platform="PC">PC</a></li>
+                <li><a href="#" data-platform="Playstation">PlayStation</a></li>
+                <li><a href="#" data-platform="Xbox">Xbox</a></li>
+            </ul>
+        </nav>
+        <div class="cart-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+            <span class="cart-count">0</span>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="carousel-inner">
+            <div class="carousel-slide" style="background-image: url('https://assetsio.gnwcdn.com/ea-play-headline-gry.jpg?width=690&quality=85&format=jpg&dpr=3&auto=webp');">
+                <div class="hero-content">
+                    <h1>Explora Nuevos Mundos</h1>
+                    <p>Los mejores títulos, las mejores ofertas. Todo en un solo lugar.</p>
+                </div>
+            </div>
+            <div class="carousel-slide" style="background-image: url('https://livecards.net/_i/51193.png');">
+                <div class="hero-content">
+                    <h1>Recarga tu partida</h1>
+                    <p>Puedes recargar tus juegos favoritos en segundos, sin complicaciones, sin salir de casa y con total seguridad.</p>
+                </div>
+            </div>
+            <div class="carousel-slide" style="background-image: url('https://hardzone.es/app/uploads-hardzone.es/2020/06/Rebajas-Steam-verano-3.jpg');">
+                <div class="hero-content">
+                    <h1>Aprovecha las ofertas</h1>
+                    <p>En GAMEFY te ayudamos a aprovechar los descuentos de steam con juegos originales.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="container">
+        <!-- Tendencias -->
+        <section class="section-container" id="trending-section">
+            <div class="section-header">
+                <h2>Tendencias 🔥</h2>
+            </div>
+            <div class="grid" id="trending-grid"></div>
+        </section>
+
+        <!-- Recargas y Tarjetas de Regalo -->
+        <section class="section-container" id="special-section">
+            <div class="section-header">
+                <h2>Recargas y Gift Cards 🎁</h2>
+            </div>
+            <div class="grid" id="special-grid"></div>
+        </section>
+
+        <!-- Recomendaciones por Categoría -->
+        <section class="section-container" id="recommendations-section">
+            <div class="section-header">
+                <h2>Recomendaciones 🌟</h2>
+            </div>
+            <div class="category-filters" id="category-filters">
+                <button class="filter-btn active" data-category="Accion">Acción</button>
+                <button class="filter-btn" data-category="Aventura">Aventura</button>
+                <button class="filter-btn" data-category="Arcade">Arcade</button>
+            </div>
+            <div class="grid" id="category-grid"></div>
+        </section>
+
+        <!-- Más Vendidos y Recientes -->
+        <section class="section-container" id="status-section">
+            <div class="section-header">
+                <h2>Más Vendidos y Recientes</h2>
+            </div>
+            <div class="grid" id="status-grid"></div>
+        </section>
+
+        <!-- Próximos Juegos -->
+        <section class="section-container" id="upcoming-section">
+            <div class="section-header">
+                <h2>Próximos Lanzamientos ⏳</h2>
+            </div>
+            <div class="grid" id="upcoming-grid"></div>
+        </section>
+    </main>
+
+    <div class="cart-drawer">
+        <div class="cart-header">
+            <h2>Tu Carrito</h2>
+            <div class="close-cart">&times;</div>
+        </div>
+        <div class="cart-items"></div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cart-total-amount">Bs0.00</span>
+            </div>
+            <button class="checkout-btn" id="open-checkout-modal">Finalizar Pedido vía WhatsApp</button>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div id="checkout-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Datos de Contacto</h2>
+            <form id="checkout-form">
+                <div class="form-group">
+                    <label for="customer-name">Nombre Completo</label>
+                    <input type="text" id="customer-name" required placeholder="Ej. Juan Pérez">
+                </div>
+                <div class="form-group">
+                    <label for="customer-phone">Teléfono de Contacto</label>
+                    <input type="tel" id="customer-phone" required placeholder="Ej. 77920302">
+                </div>
+                <button type="submit" class="confirm-order-btn">Confirmar Pedido</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>GAMEFY</h3>
+                <p>Tu destino número uno para videojuegos, recargas y tarjetas de regalo. Los mejores precios del mercado.</p>
+                <p>📍 Santa Cruz, Bolivia</p>
+            </div>
+            <div class="footer-section">
+                <h3>Categorías</h3>
+                <ul>
+                    <li><a href="#">PC Games</a></li>
+                    <li><a href="#">PlayStation</a></li>
+                    <li><a href="#">Xbox</a></li>
+                    <li><a href="#">Recargas</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Soporte</h3>
+                <ul>
+                    <li><a href="#">Contacto</a></li>
+                    <li><a href="#">Preguntas Frecuentes</a></li>
+                    <li><a href="#">Términos y Condiciones</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contacto</h3>
+                <p>📞 +591 78019174</p>
+                <p>📧 contacto@gamevault.com</p>
+                <p>🕒 Lun - Vie: 9:00 - 21:00</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 GAMEF<span>I</span>. Todos los derechos reservados.
+        </div>
+    </footer>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>
